@@ -19,7 +19,8 @@ SELECT
 FROM
   property AS p
   LEFT JOIN review AS r
-    ON p.property_id = r.property_id;
+    ON p.property_id = r.property_id
+	ORDER BY p.property_id, r.review_id;
 
 
 SELECT u.user_id, u.first_name, b.booking_id
