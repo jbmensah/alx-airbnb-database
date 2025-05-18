@@ -22,7 +22,7 @@ SELECT
 property_id,
 name,
 bookings_count,
-ROW_NUMBER() OVER (
+RANK() OVER (
 	ORDER BY bookings_count DESC
 ) AS rank_by_bookings
 FROM (
