@@ -17,11 +17,13 @@ ORDER BY
 	total_bookings DESC;
 
 -- 2b) Window Function: Rank Properties by Popularity
--- 2b) Window Function: Rank Properties by Popularity
 SELECT
-property_id,
-name,
-bookings_count,
+	property_id,
+	name,
+	bookings_count,
+ROW_NUMBER() OVER (
+	ORDER BY bookings_count DESC
+	) AS rank_by_bookings, 
 RANK() OVER (
 	ORDER BY bookings_count DESC
 ) AS rank_by_bookings
