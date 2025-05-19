@@ -33,7 +33,8 @@ WITH recent_bookings AS (
   FROM
     booking
   WHERE
-    start_date >= CURRENT_DATE - INTERVAL '6' MONTH  -- pre-filter
+    start_date >= CURRENT_DATE - INTERVAL '6' MONTH
+    AND status = 'confirmed'
 )
 SELECT
   rb.booking_id,
@@ -49,8 +50,9 @@ SELECT
 FROM
   recent_bookings AS rb
   JOIN property AS p
-    ON rb.property_id = p.property_id    -- uses idx_booking_property
+    ON rb.property_id = p.property_id
   JOIN users    AS u
-    ON rb.user_id     = u.user_id        -- uses idx_booking_user
+    ON rb.user_id     = u.user_id
   LEFT JOIN payment  AS pay
-    ON rb.booking_id  = pay.booking_id;  -- uses FK index on payment.booking_id
+    ON rb.booking_id  = pay.booking_id;
+
